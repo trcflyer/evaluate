@@ -1,0 +1,23 @@
+body {
+      background:url(../img/welcome.jpg) #f8f6e9;
+}
+.cover-container{
+	text-align: center;
+}
+.inner-cover{
+	margin-top:200px;
+}
+.mastfoot{
+	position:fixed;
+	bottom:100px;
+	left:30%;
+	right:30%;
+	text-align: center;
+}
+.logo{
+	position:fixed;
+	top:20px;
+	right:20px;
+	height:10%;
+	width:20%;
+}

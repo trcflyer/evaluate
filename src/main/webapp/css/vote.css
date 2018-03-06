@@ -1,0 +1,9 @@
+body {
+     text-align:center;
+}
+.tab{
+	margin-left:100px;
+	margin-left:250px;
+	margin-right:250px;
+	border:0.5px solid blue;
+}
