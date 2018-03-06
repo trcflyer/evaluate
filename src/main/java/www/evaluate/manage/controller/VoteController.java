@@ -30,7 +30,7 @@ import www.evaluate.manage.service.UserService;
 
 @Controller
 @RequestMapping("/")
-@SessionAttributes("listDepart")
+@SessionAttributes(value={"listDepart","listPerson"})
 public class VoteController {
 	private static Logger logger = Logger.getLogger(VoteController.class);
 
@@ -72,9 +72,9 @@ public class VoteController {
 		logger.info("[投票]查询到的选项大小为："+listOption.size());
 		
 		mav.addObject("listDepart", listDepart);
+		mav.addObject("listPerson", listPerson);
 		mav.addObject("size", listDepart.size()+listDepart.size());
 		
-		mav.addObject("listPerson", listPerson);
 		
 		mav.addObject("listOption", listOption);
 
@@ -82,7 +82,7 @@ public class VoteController {
 	}
 	@RequestMapping("/evaluate")
 	public ModelAndView evaluate(@ModelAttribute("listDepart") List<TbDepart> listDepart ,
-			HttpServletRequest request) {
+			@ModelAttribute("listPerson") List<TbPerson> listPerson ,HttpServletRequest request) {
 		logger.info("[提交投票结果]开始");
 		ModelAndView mav = new ModelAndView("result");
 		TbUser tbuser = (TbUser) request.getSession().getAttribute("tbuser");
@@ -90,11 +90,24 @@ public class VoteController {
 		for(int i = 0 ; i < listDepart.size() ; i ++){
 			TbDepart tbDepart = listDepart.get(i);
 			int temp = i+1;
-			String[] checkedStr = request.getParameterValues("option-name"+temp);
+			String[] checkedStr = request.getParameterValues("option-depart-name"+temp);
 			int checked = Integer.parseInt(checkedStr[0].trim());
 			TbEvaluate record = new TbEvaluate();
 			record.setOptionid(checked);
-			record.setDepartid(tbDepart.getId());
+			record.setResid(tbDepart.getId());
+			record.setUserid(tbuser.getId());
+			record.setRes("depart");
+			evaluateService.insertEvaluate(record);
+		}
+		for(int i = 0 ; i < listPerson.size() ; i ++){
+			TbDepart tbDepart = listDepart.get(i);
+			int temp = i+1;
+			String[] checkedStr = request.getParameterValues("option-person-name"+temp);
+			int checked = Integer.parseInt(checkedStr[0].trim());
+			TbEvaluate record = new TbEvaluate();
+			record.setOptionid(checked);
+			record.setResid(tbDepart.getId());
+			record.setRes("person");
 			record.setUserid(tbuser.getId());
 			evaluateService.insertEvaluate(record);
 		}
@@ -111,14 +124,14 @@ public class VoteController {
 	        resp.setCharacterEncoding("UTF-8");
 		logger.info("[部门显示投票结果]开始");
 		List<TbDepart> listDepart= departmentServiceImpl.getAll();
-		List<TbEvaluate> listEvaluate = evaluateService.getAll();
+		List<TbEvaluate> listEvaluate = evaluateService.getAllByRes("depart");
 		List<TbOption> listOption = optionServiceImpl.getAll();
 		JSONArray array = new JSONArray();
 		for(TbDepart depart:listDepart){
 			JSONObject object = new JSONObject();
 			int score = 0;
 			for(TbEvaluate evaluate:listEvaluate){
-				if(depart.getId().equals(evaluate.getDepartid())){
+				if(depart.getId().equals(evaluate.getResid())){
 					for(TbOption option:listOption){
 						if(option.getId().equals(evaluate.getOptionid())){
 							score += option.getScore();
@@ -144,14 +157,14 @@ public class VoteController {
 	        resp.setCharacterEncoding("UTF-8");
 		logger.info("[人员显示投票结果]开始");
 		List<TbPerson> listPerson= personServiceImpl.getAll();
-		List<TbEvaluate> listEvaluate = evaluateService.getAll();
+		List<TbEvaluate> listEvaluate = evaluateService.getAllByRes("person");
 		List<TbOption> listOption = optionServiceImpl.getAll();
 		JSONArray array = new JSONArray();
 		for(TbPerson person:listPerson){
 			JSONObject object = new JSONObject();
 			int score = 0;
 			for(TbEvaluate evaluate:listEvaluate){
-				if(person.getId().equals(evaluate.getDepartid())){
+				if(person.getId().equals(evaluate.getResid())){
 					for(TbOption option:listOption){
 						if(option.getId().equals(evaluate.getOptionid())){
 							score += option.getScore();

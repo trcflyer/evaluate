@@ -1,45 +1,54 @@
 package www.evaluate.manage.pojo;
 
 public class TbEvaluate {
-    private Integer id;
+	 private Integer id;
 
-    private Integer userid;
+	    private Integer userid;
 
-    private Integer departid;
+	    private Integer resid;
 
-    private Integer optionid;
+	    private Integer optionid;
 
-    public Integer getId() {
-        return id;
-    }
+	    private String res;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	    public Integer getId() {
+	        return id;
+	    }
 
-    public Integer getUserid() {
-        return userid;
-    }
+	    public void setId(Integer id) {
+	        this.id = id;
+	    }
 
-    public void setUserid(Integer userid) {
-        this.userid = userid;
-    }
+	    public Integer getUserid() {
+	        return userid;
+	    }
 
-    public Integer getDepartid() {
-        return departid;
-    }
+	    public void setUserid(Integer userid) {
+	        this.userid = userid;
+	    }
 
-    public void setDepartid(Integer departid) {
-        this.departid = departid;
-    }
+	    public Integer getResid() {
+	        return resid;
+	    }
 
-	public Integer getOptionid() {
-		return optionid;
-	}
+	    public void setResid(Integer resid) {
+	        this.resid = resid;
+	    }
 
-	public void setOptionid(Integer optionid) {
-		this.optionid = optionid;
-	}
+	    public Integer getOptionid() {
+	        return optionid;
+	    }
 
+	    public void setOptionid(Integer optionid) {
+	        this.optionid = optionid;
+	    }
+
+	    public String getRes() {
+	        return res;
+	    }
+
+	    public void setRes(String res) {
+	        this.res = res == null ? null : res.trim();
+	    }
 
 }

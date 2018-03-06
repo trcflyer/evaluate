@@ -38,7 +38,7 @@
 						</p>
 						<div id="option${item.id }">
 							<c:forEach var="option" items="${listOption }">
-								<input type="checkbox" name="option-name${item.id }"
+								<input type="checkbox" name="option-depart-name${item.id }"
 									value=" ${option.id }" onclick="myCheck(this)" /> ${option.name }
 					</c:forEach>
 						</div>
@@ -56,7 +56,7 @@
 						</p>
 						<div id="option${item.id }">
 							<c:forEach var="option" items="${listOption }">
-								<input type="checkbox" name="option-name${item.id }"
+								<input type="checkbox" name="option-person-name${item.id }"
 									value=" ${option.id }" onclick="myCheck(this)" /> ${option.name }
 					</c:forEach>
 						</div>

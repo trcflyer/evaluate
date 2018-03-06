@@ -30,4 +30,6 @@ public interface TbEvaluateMapper {
     int updateByPrimaryKey(TbEvaluate record);
     
     List<TbEvaluate> getAll();
+    
+    List<TbEvaluate> getAllByRes(String res);
 }

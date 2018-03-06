@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50721
 File Encoding         : 65001
 
-Date: 2018-03-06 10:11:45
+Date: 2018-03-06 15:28:02
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -62,20 +62,27 @@ DROP TABLE IF EXISTS `tb_evaluate`;
 CREATE TABLE `tb_evaluate` (
   `id` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `userid` int(10) NOT NULL,
-  `departid` int(10) NOT NULL,
+  `resid` int(10) NOT NULL,
   `optionid` int(10) NOT NULL,
+  `res` varchar(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tb_evaluate
 -- ----------------------------
-INSERT INTO `tb_evaluate` VALUES ('0000000013', '1', '1', '1');
-INSERT INTO `tb_evaluate` VALUES ('0000000014', '1', '2', '1');
-INSERT INTO `tb_evaluate` VALUES ('0000000015', '1', '3', '1');
-INSERT INTO `tb_evaluate` VALUES ('0000000016', '1', '4', '1');
-INSERT INTO `tb_evaluate` VALUES ('0000000017', '1', '5', '1');
-INSERT INTO `tb_evaluate` VALUES ('0000000018', '1', '6', '1');
+INSERT INTO `tb_evaluate` VALUES ('0000000019', '1', '1', '4', 'depart');
+INSERT INTO `tb_evaluate` VALUES ('0000000020', '1', '2', '3', 'depart');
+INSERT INTO `tb_evaluate` VALUES ('0000000021', '1', '3', '2', 'depart');
+INSERT INTO `tb_evaluate` VALUES ('0000000022', '1', '4', '1', 'depart');
+INSERT INTO `tb_evaluate` VALUES ('0000000023', '1', '5', '1', 'depart');
+INSERT INTO `tb_evaluate` VALUES ('0000000024', '1', '6', '1', 'depart');
+INSERT INTO `tb_evaluate` VALUES ('0000000025', '1', '1', '1', 'person');
+INSERT INTO `tb_evaluate` VALUES ('0000000026', '1', '2', '2', 'person');
+INSERT INTO `tb_evaluate` VALUES ('0000000027', '1', '3', '3', 'person');
+INSERT INTO `tb_evaluate` VALUES ('0000000028', '1', '4', '4', 'person');
+INSERT INTO `tb_evaluate` VALUES ('0000000029', '1', '5', '3', 'person');
+INSERT INTO `tb_evaluate` VALUES ('0000000030', '1', '6', '3', 'person');
 
 -- ----------------------------
 -- Table structure for `tb_option`

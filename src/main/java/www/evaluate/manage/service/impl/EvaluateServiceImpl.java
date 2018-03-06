@@ -23,5 +23,8 @@ public class EvaluateServiceImpl implements EvaluateService {
 	public List<TbEvaluate> getAll() {
 		return tbEvaluateMapper.getAll();
 	}
+	public List<TbEvaluate> getAllByRes(String res) {
+		return tbEvaluateMapper.getAllByRes(res);
+	}
 
 }

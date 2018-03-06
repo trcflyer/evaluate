@@ -4,8 +4,9 @@
   <resultMap id="BaseResultMap" type="www.evaluate.manage.pojo.TbEvaluate" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="userid" property="userid" jdbcType="INTEGER" />
-    <result column="departid" property="departid" jdbcType="INTEGER" />
+    <result column="resid" property="resid" jdbcType="INTEGER" />
     <result column="optionid" property="optionid" jdbcType="INTEGER" />
+    <result column="res" property="res" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -66,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, userid, departid, optionid
+    id, userid, resid, optionid, res
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="www.evaluate.manage.pojo.TbEvaluateExample" >
     select
@@ -99,10 +100,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="www.evaluate.manage.pojo.TbEvaluate" >
-    insert into tb_evaluate (id, userid, departid, 
-      optionid)
-    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{departid,jdbcType=INTEGER}, 
-      #{optionid,jdbcType=VARCHAR})
+    insert into tb_evaluate (id, userid, resid, 
+      optionid, res)
+    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{resid,jdbcType=INTEGER}, 
+      #{optionid,jdbcType=INTEGER}, #{res,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="www.evaluate.manage.pojo.TbEvaluate" >
     insert into tb_evaluate
@@ -113,11 +114,14 @@
       <if test="userid != null" >
         userid,
       </if>
-      <if test="departid != null" >
-        departid,
+      <if test="resid != null" >
+        resid,
       </if>
       <if test="optionid != null" >
         optionid,
+      </if>
+      <if test="res != null" >
+        res,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -127,11 +131,14 @@
       <if test="userid != null" >
         #{userid,jdbcType=INTEGER},
       </if>
-      <if test="departid != null" >
-        #{departid,jdbcType=INTEGER},
+      <if test="resid != null" >
+        #{resid,jdbcType=INTEGER},
       </if>
       <if test="optionid != null" >
-        #{optionid,jdbcType=VARCHAR},
+        #{optionid,jdbcType=INTEGER},
+      </if>
+      <if test="res != null" >
+        #{res,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -150,11 +157,14 @@
       <if test="record.userid != null" >
         userid = #{record.userid,jdbcType=INTEGER},
       </if>
-      <if test="record.departid != null" >
-        departid = #{record.departid,jdbcType=INTEGER},
+      <if test="record.resid != null" >
+        resid = #{record.resid,jdbcType=INTEGER},
       </if>
       <if test="record.optionid != null" >
-        optionid = #{record.optionid,jdbcType=VARCHAR},
+        optionid = #{record.optionid,jdbcType=INTEGER},
+      </if>
+      <if test="record.res != null" >
+        res = #{record.res,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -165,8 +175,9 @@
     update tb_evaluate
     set id = #{record.id,jdbcType=INTEGER},
       userid = #{record.userid,jdbcType=INTEGER},
-      departid = #{record.departid,jdbcType=INTEGER},
-      optionid = #{record.optionid,jdbcType=VARCHAR}
+      resid = #{record.resid,jdbcType=INTEGER},
+      optionid = #{record.optionid,jdbcType=INTEGER},
+      res = #{record.res,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -177,11 +188,14 @@
       <if test="userid != null" >
         userid = #{userid,jdbcType=INTEGER},
       </if>
-      <if test="departid != null" >
-        departid = #{departid,jdbcType=INTEGER},
+      <if test="resid != null" >
+        resid = #{resid,jdbcType=INTEGER},
       </if>
       <if test="optionid != null" >
-        optionid = #{optionid,jdbcType=VARCHAR},
+        optionid = #{optionid,jdbcType=INTEGER},
+      </if>
+      <if test="res != null" >
+        res = #{res,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -189,13 +203,19 @@
   <update id="updateByPrimaryKey" parameterType="www.evaluate.manage.pojo.TbEvaluate" >
     update tb_evaluate
     set userid = #{userid,jdbcType=INTEGER},
-      departid = #{departid,jdbcType=INTEGER},
-      optionid = #{optionid,jdbcType=VARCHAR}
+      resid = #{resid,jdbcType=INTEGER},
+      optionid = #{optionid,jdbcType=INTEGER},
+      res = #{res,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="getAll" resultMap="BaseResultMap"  >
     select
     <include refid="Base_Column_List" />
     from tb_evaluate
+  </select>
+  <select id="getAllByRes" parameterType="String" resultMap="BaseResultMap"  >
+    select
+    <include refid="Base_Column_List" />
+    from tb_evaluate where res = #{0}
   </select>
 </mapper>
